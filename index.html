@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiv Jayanti - A Tribute to the Great Maratha King</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Teko:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --saffron: #FF9933;
+            --dark-saffron: #D95F02;
+            --gold: #FFD700;
+            --dark-bg-primary: #111827; /* Deep blue-gray */
+            --dark-bg-secondary: #1F2937; /* Lighter blue-gray */
+            --text-light: #F3F4F6;
+            --text-medium: #9CA3AF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg-primary);
+            color: var(--text-light);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Teko', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .bg-saffron { background-color: var(--saffron); }
+        .text-saffron { color: var(--saffron); }
+        .border-saffron { border-color: var(--saffron); }
+        .bg-dark-saffron { background-color: var(--dark-saffron); }
+        .text-dark-saffron { color: var(--dark-saffron); }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://placehold.co/1920x1080/111827/ffffff?text=Chhatrapati+Shivaji+Maharaj') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .waving-flag {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--saffron), var(--dark-saffron));
+            opacity: 0.1;
+            animation: wave 20s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--dark-bg-secondary);
+            border: 4px solid var(--saffron);
+            z-index: 1;
+        }
+        
+        .leader-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--dark-bg-secondary);
+        }
+
+        .leader-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(255, 153, 51, 0.1), 0 10px 10px -5px rgba(255, 153, 51, 0.05);
+        }
+        
+        .fort-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .fort-card img {
+            transition: transform 0.5s ease;
+        }
+        .fort-card:hover img {
+            transform: scale(1.1);
+        }
+        .fort-card .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+        .fort-card:hover .overlay {
+            transform: translateY(0);
+        }
+
+        /* Animated Background */
+        #animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -50px;
+            background-color: var(--saffron);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatUp 25s infinite linear;
+            box-shadow: 0 0 10px var(--saffron), 0 0 20px var(--saffron);
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-110vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Animated Background -->
+    <div id="animated-bg"></div>
+
+    <!-- Header -->
+    <header class="bg-dark-bg-secondary/80 backdrop-blur-sm sticky top-0 z-50 shadow-lg shadow-black/20">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-4xl font-bold text-white">शिवजयंती</h1>
+            <ul class="hidden md:flex space-x-8 text-text-light font-semibold items-center">
+                <li><a href="#home" class="hover:text-saffron transition-colors">Home</a></li>
+                <li><a href="#history" class="hover:text-saffron transition-colors">Shivaji Maharaj</a></li>
+                <li><a href="#empire" class="hover:text-saffron transition-colors">The Empire</a></li>
+                <li><a href="#leaders" class="hover:text-saffron transition-colors">Leaders</a></li>
+                <li><a href="#forts" class="hover:text-saffron transition-colors">Forts</a></li>
+                <li><a href="#legacy" class="hover:text-saffron transition-colors">Legacy</a></li>
+            </ul>
+            <button class="md:hidden text-white text-3xl" id="menu-btn">
+                &#9776;
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-bg-secondary">
+             <a href="#home" class="block py-2 px-4 text-white hover:bg-dark-saffron">Home</a>
+             <a href="#history" class="block py-2 px-4 text-white hover:bg-dark-saffron">Shivaji Maharaj</a>
+             <a href="#empire" class="block py-2 px-4 text-white hover:bg-dark-saffron">The Empire</a>
+             <a href="#leaders" class="block py-2 px-4 text-white hover:bg-dark-saffron">Leaders</a>
+             <a href="#forts" class="block py-2 px-4 text-white hover:bg-dark-saffron">Forts</a>
+             <a href="#legacy" class="block py-2 px-4 text-white hover:bg-dark-saffron">Legacy</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section h-screen flex items-center justify-center text-center text-white relative">
+            <div class="waving-flag"></div>
+            <div class="z-10 scroll-reveal">
+                <h2 class="text-7xl md:text-9xl font-extrabold" style="font-family: 'Teko', sans-serif;">छत्रपती शिवाजी महाराज</h2>
+                <p class="text-2xl md:text-4xl mt-4 font-light">A Tribute to the Sovereign, the Warrior, the Visionary</p>
+                <p class="text-xl md:text-2xl mt-2 text-gold" style="font-family: 'Teko', sans-serif;">Celebrating Shiv Jayanti</p>
+                <a href="#history" class="mt-8 inline-block bg-saffron hover:bg-dark-saffron text-white font-bold py-3 px-8 rounded-full transition-all duration-300 text-lg">
+                    Explore the Legacy
+                </a>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="intro" class="py-20 bg-dark-bg-secondary">
+            <div class="container mx-auto px-6 text-center">
+                <div class="scroll-reveal">
+                    <h2 class="text-5xl md:text-6xl font-bold text-saffron">The Legend of a True King</h2>
+                    <p class="mt-6 max-w-3xl mx-auto text-lg text-text-medium">
+                        Shiv Jayanti marks the birth of Chhatrapati Shivaji Maharaj, the founder of the Maratha Empire. It's a day to remember his courage, his revolutionary administrative and military strategies, and his unwavering commitment to 'Swaraj' - self-rule. This website is a humble tribute to his indomitable spirit.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section: Shivaji Maharaj -->
+        <section id="history" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 scroll-reveal">
+                    <h2 class="text-5xl md:text-6xl font-bold text-saffron">The Life of Chhatrapati Shivaji Maharaj</h2>
+                    <p class="mt-4 text-lg text-text-medium">A journey through the key milestones of a legendary life.</p>
+                </div>
+                <div class="relative max-w-3xl mx-auto">
+                    <div class="border-l-4 border-dark-saffron absolute h-full top-0 left-[-15px]"></div>
+                    <!-- Timeline Items -->
+                    <div class="mb-12 pl-8 relative timeline-item scroll-reveal">
+                        <h3 class="text-3xl font-bold text-saffron">1630 - The Birth of a Legend</h3>
+                        <p class="text-text-medium mt-2">Born in the hill-fort of Shivneri, Shivaji was instilled with the ideals of dharma and self-respect by his mother, Jijabai, and his mentor, Dadoji Konddeo.</p>
+                    </div>
+                    <div class="mb-12 pl-8 relative timeline-item scroll-reveal">
+                        <h3 class="text-3xl font-bold text-saffron">1645 - The Oath of Swaraj</h3>
+                        <p class="text-text-medium mt-2">At the tender age of 15, at Raireshwar temple, Shivaji and his loyal friends took a solemn oath to establish 'Hindavi Swaraj' - a self-governing kingdom of the people.</p>
+                    </div>
+                    <div class="mb-12 pl-8 relative timeline-item scroll-reveal">
+                        <h3 class="text-3xl font-bold text-saffron">1659 - The Victory at Pratapgad</h3>
+                        <p class="text-text-medium mt-2">In a legendary encounter, Shivaji Maharaj strategically defeated the formidable Adilshahi general, Afzal Khan, showcasing his tactical genius and bravery.</p>
+                    </div>
+                    <div class="mb-12 pl-8 relative timeline-item scroll-reveal">
+                        <h3 class="text-3xl font-bold text-saffron">1674 - The Coronation</h3>
+                        <p class="text-text-medium mt-2">Shivaji Maharaj was formally crowned 'Chhatrapati' (sovereign) at Raigad fort, establishing the Maratha Empire as a legitimate and powerful entity.</p>
+                    </div>
+                    <div class="pl-8 relative timeline-item scroll-reveal">
+                        <h3 class="text-3xl font-bold text-saffron">1680 - The Legacy Begins</h3>
+                        <p class="text-text-medium mt-2">Though his reign was short, his death marked the beginning of an immortal legacy that inspired generations to fight for justice and freedom.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- The Maratha Empire Section -->
+        <section id="empire" class="py-20 bg-dark-bg-secondary">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 scroll-reveal">
+                    <h2 class="text-5xl md:text-6xl font-bold text-saffron">The Mighty Maratha Empire</h2>
+                    <p class="mt-4 text-lg text-text-medium">From a small jagir to a pan-Indian empire.</p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2 scroll-reveal">
+                        <img src="https://placehold.co/600x400/FF9933/111827?text=Maratha+Empire+Map" alt="Map of the Maratha Empire" class="rounded-lg shadow-2xl shadow-black/30 w-full">
+                    </div>
+                    <div class="md:w-1/2 scroll-reveal">
+                        <h3 class="text-4xl font-bold text-saffron mb-4">Rise of an Empire</h3>
+                        <p class="text-text-medium mb-4">
+                            Founded by Chhatrapati Shivaji Maharaj, the Maratha Empire was known for its mobility, guerrilla warfare tactics, and a strong network of sea and land forts. It challenged the might of the Mughal Empire and, at its peak, controlled a vast territory across the Indian subcontinent.
+                        </p>
+                        <p class="text-text-medium">
+                            The empire was a testament to Shivaji's vision of a state run with principles of justice, religious tolerance, and efficient administration, a model far ahead of its time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Great Leaders Section -->
+        <section id="leaders" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 scroll-reveal">
+                    <h2 class="text-5xl md:text-6xl font-bold text-saffron">Pillars of the Empire</h2>
+                    <p class="mt-4 text-lg text-text-medium">Brave hearts who carried the saffron flag high.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Leader Cards -->
+                    <div class="rounded-lg shadow-lg p-6 text-center leader-card scroll-reveal">
+                        <img src="https://placehold.co/200x200/111827/ffffff?text=Sambhaji+Maharaj" alt="Sambhaji Maharaj" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-saffron">
+                        <h3 class="text-2xl font-bold text-saffron">Chhatrapati Sambhaji Maharaj</h3>
+                        <p class="text-text-medium mt-2">The valiant son of Shivaji Maharaj, a scholar and warrior who fiercely defended the empire against overwhelming odds.</p>
+                    </div>
+                    <div class="rounded-lg shadow-lg p-6 text-center leader-card scroll-reveal" style="transition-delay: 0.1s;">
+                        <img src="https://placehold.co/200x200/111827/ffffff?text=Tarabai+Bhosale" alt="Tarabai Bhosale" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-saffron">
+                        <h3 class="text-2xl font-bold text-saffron">Maharani Tarabai</h3>
+                        <p class="text-text-medium mt-2">The regent queen who led the Maratha resistance against the Mughals with incredible courage and strategic acumen.</p>
+                    </div>
+                    <div class="rounded-lg shadow-lg p-6 text-center leader-card scroll-reveal" style="transition-delay: 0.2s;">
+                        <img src="https://placehold.co/200x200/111827/ffffff?text=Bajirao+I" alt="Peshwa Bajirao I" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-saffron">
+                        <h3 class="text-2xl font-bold text-saffron">Peshwa Bajirao I</h3>
+                        <p class="text-text-medium mt-2">An undefeated general who vastly expanded the Maratha Empire through his brilliant military campaigns.</p>
+                    </div>
+                    <div class="rounded-lg shadow-lg p-6 text-center leader-card scroll-reveal" style="transition-delay: 0.3s;">
+                        <img src="https://placehold.co/200x200/111827/ffffff?text=Tanaji+Malusare" alt="Tanaji Malusare" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-saffron">
+                        <h3 class="text-2xl font-bold text-saffron">Tanaji Malusare</h3>
+                        <p class="text-text-medium mt-2">A close companion of Shivaji, whose legendary bravery in the Battle of Sinhagad is immortalized in Maratha folklore.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Forts Section -->
+        <section id="forts" class="py-20 bg-dark-bg-secondary">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 scroll-reveal">
+                    <h2 class="text-5xl md:text-6xl font-bold text-saffron">The Sentinel Forts</h2>
+                    <p class="mt-4 text-lg text-text-medium">The unbreachable hill forts that were the backbone of Swaraj.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Fort Cards -->
+                    <div class="rounded-lg shadow-xl shadow-black/30 fort-card scroll-reveal">
+                        <img src="https://placehold.co/400x500/1F2937/ffffff?text=Raigad+Fort" alt="Raigad Fort" class="w-full h-full object-cover">
+                        <div class="overlay">
+                            <h3 class="text-3xl font-bold">Raigad</h3>
+                            <p class="mt-2">The capital of the Maratha Empire, where Shivaji Maharaj was crowned.</p>
+                        </div>
+                    </div>
+                    <div class="rounded-lg shadow-xl shadow-black/30 fort-card scroll-reveal" style="transition-delay: 0.1s;">
+                        <img src="https://placehold.co/400x500/1F2937/ffffff?text=Sinhagad+Fort" alt="Sinhagad Fort" class="w-full h-full object-cover">
+                        <div class="overlay">
+                            <h3 class="text-3xl font-bold">Sinhagad</h3>
+                            <p class="mt-2">The 'Lion's Fort', won by Tanaji Malusare in a historic battle.</p>
+                        </div>
+                    </div>
+                    <div class="rounded-lg shadow-xl shadow-black/30 fort-card scroll-reveal" style="transition-delay: 0.2s;">
+                        <img src="https://placehold.co/400x500/1F2937/ffffff?text=Pratapgad+Fort" alt="Pratapgad Fort" class="w-full h-full object-cover">
+                        <div class="overlay">
+                            <h3 class="text-3xl font-bold">Pratapgad</h3>
+                            <p class="mt-2">Witness to the historic victory against Afzal Khan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legacy Section -->
+        <section id="legacy" class="py-20">
+            <div class="container mx-auto px-6 text-center">
+                <div class="scroll-reveal">
+                    <h2 class="text-5xl md:text-6xl font-bold text-saffron">An Everlasting Legacy</h2>
+                    <p class="mt-6 max-w-4xl mx-auto text-lg text-text-medium">
+                        Chhatrapati Shivaji Maharaj was more than a king; he was a nation-builder. His principles of administration, naval power, respect for all religions, and empowerment of the common man continue to inspire India. His life is a powerful reminder that with courage and a just cause, one can challenge the greatest of empires.
+                    </p>
+                    <div class="mt-8 text-3xl font-bold text-saffron" style="font-family: 'Poppins', sans-serif;">
+                        "जय भवानी, जय शिवाजी!"
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-saffron text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Shiv Jayanti Celebrations. A tribute to the great Maratha heritage.</p>
+            <p class="text-sm mt-2">Designed with respect and admiration.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
+        for (let link of mobileMenuLinks) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        }
+
+        // Scroll Reveal Animation
+        const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        scrollRevealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+
+        // Animated Background Particles
+        function createParticles() {
+            const particleContainer = document.getElementById('animated-bg');
+            const particleCount = 50; // Number of particles
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 5 + 1; // size between 1px and 6px
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}%`;
+                
+                const animationDuration = Math.random() * 20 + 15; // duration between 15s and 35s
+                particle.style.animationDuration = `${animationDuration}s`;
+                
+                const animationDelay = Math.random() * 20; // delay up to 20s
+                particle.style.animationDelay = `${animationDelay}s`;
+                
+                particleContainer.appendChild(particle);
+            }
+        }
+        
+        window.onload = createParticles;
+    </script>
+
+</body>
+
+</html>
